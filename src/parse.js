@@ -27,7 +27,7 @@ const parse = (firstPath, secondPath) => {
     }
     return { ...acc, [`  ${key}`]: firstObj[key] };
   }, {});
-  return JSON.stringify(rsl, null, 2).replaceAll('"', '');
+  return JSON.stringify(rsl, null, 2).replaceAll(/"|,/g, '');
 };
 
 export default parse;
