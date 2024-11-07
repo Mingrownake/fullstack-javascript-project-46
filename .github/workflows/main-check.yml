@@ -12,8 +12,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm test
-      - uses: paambaati/codeclimate-action@v9.0.0
+      - uses: remarkablemark/setup-codeclimate@v2
+      - run: |
+          cc-test-reporter before-build
+          npm test
+          cc-test-reporter after-build --exit-code $?
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       
