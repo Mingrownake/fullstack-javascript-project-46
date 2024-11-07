@@ -7,7 +7,7 @@
     "gendiff": "./bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Mingrow",
   "license": "ISC",
@@ -15,7 +15,8 @@
   "devDependencies": {
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.31.0"
+    "eslint-plugin-import": "^2.31.0",
+    "jest": "^29.7.0"
   },
   "dependencies": {
     "commander": "^12.1.0",

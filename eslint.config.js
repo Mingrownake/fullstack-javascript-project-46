@@ -39,6 +39,16 @@ export default [
   },
   ...compat.extends('airbnb-base'),
   {
+    overrides: [
+      {
+        'files': ['__tests__/**/*'],
+        'env': {
+          'jest': true,
+        },
+      },
+    ],
+  },
+  {
     rules: {
       'no-underscore-dangle': [
         'error',
