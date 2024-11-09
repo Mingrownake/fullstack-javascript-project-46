@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import parse from '../src/parse.js';
+import parsers from '../src/parsers.js';
 
 program
   .name('gendiff')
@@ -11,7 +11,7 @@ program
     if (options.format) {
       console.log('Hello world!');
     }
-    console.log(parse(filePath1, filePath2));
+    console.log(parsers(filePath1, filePath2));
   })
   .version('1.0.0');
 

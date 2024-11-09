@@ -1,13 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { cwd } from 'node:process';
+import jsYaml from 'js-yaml';
 import path from 'node:path';
 import _ from 'lodash';
 
-const parse = (firstPath, secondPath) => {
-  const firstFilePath = path.resolve(cwd(), firstPath);
-  const secondFilePath = path.resolve(cwd(), secondPath);
-  const firstObj = JSON.parse(readFileSync(firstFilePath));
-  const secondObj = JSON.parse(readFileSync(secondFilePath));
+const parsers = (firstPath, secondPath) => {
+  const firstObj = createJSON(firstPath);
+  const secondObj = createJSON(secondPath);
   const keys = _.sortBy(_.union(Object.keys(firstObj), Object.keys(secondObj)));
   const rsl = keys.reduce((acc, key) => {
     if (!_.has(firstObj, key) && _.has(secondObj, key)) {
@@ -30,4 +29,13 @@ const parse = (firstPath, secondPath) => {
   return JSON.stringify(rsl, null, 2).replaceAll(/"|,/g, '');
 };
 
-export default parse;
+const createJSON = (file) => {
+  const filePath = path.resolve(cwd(), file);
+  const extName = path.extname(filePath);
+  if (extName === '.yaml' || extName === '.yml') {
+    return jsYaml.load(readFileSync(filePath, 'utf-8'));
+  }
+  return JSON.parse(readFileSync(filePath, 'utf-8'));
+};
+
+export default parsers;
