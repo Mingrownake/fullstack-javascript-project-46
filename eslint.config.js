@@ -16,14 +16,10 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['dist/'],
-  },
-  {
     languageOptions: {
       globals: {
         ...globals.node,
         ...globals.jest,
-        ...globals.browser,
       },
       parserOptions: {
         // Eslint doesn't supply ecmaVersion in `parser.js` `context.parserOptions`
@@ -38,16 +34,6 @@ export default [
     },
   },
   ...compat.extends('airbnb-base'),
-  {
-    overrides: [
-      {
-        'files': ['__tests__/**/*'],
-        'env': {
-          'jest': true,
-        },
-      },
-    ],
-  },
   {
     rules: {
       'no-underscore-dangle': [
